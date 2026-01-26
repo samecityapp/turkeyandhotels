@@ -34,7 +34,21 @@ const offers = [
     }
 ];
 
-export const Pricing = () => {
+
+interface PricingProps {
+    hotelName?: string;
+    customPrice?: string;
+}
+
+export const Pricing = ({ hotelName, customPrice }: PricingProps) => {
+    // Clone offers to avoid mutating the original array reference if reused
+    const currentOffers = offers.map(offer => ({ ...offer }));
+
+    // Override Standard Package (Index 0) Price if provided
+    if (customPrice) {
+        currentOffers[0].price = customPrice;
+    }
+
     return (
         <section className="pt-10 pb-20 px-4 bg-gradient-to-b from-transparent to-black/50">
             <div className="max-w-5xl mx-auto">
@@ -44,12 +58,14 @@ export const Pricing = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Tanıtım Paketleri</h2>
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                        {hotelName ? `${hotelName} İçin Tanıtım Paketleri` : "Tanıtım Paketleri"}
+                    </h2>
                     <p className="text-white/60">İşletmeniz için en uygun tanıtım paketini seçin</p>
                 </motion.div>
 
                 <div className="grid md:grid-cols-2 gap-8 items-center">
-                    {offers.map((offer, index) => (
+                    {currentOffers.map((offer, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, scale: 0.95 }}

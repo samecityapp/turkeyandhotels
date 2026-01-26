@@ -1,0 +1,78 @@
+import prisma from "@/lib/prisma";
+import { createOffer, deleteOffer } from "../actions";
+
+export default async function AdminPage() {
+    const offers = await prisma.offer.findMany({
+        orderBy: { createdAt: "desc" }
+    });
+
+    return (
+        <main className="min-h-screen bg-slate-950 text-white p-8">
+            <h1 className="text-3xl font-bold mb-8 text-gold-500">Admin Paneli - Teklif Yönetimi</h1>
+
+            {/* Create Form */}
+            <div className="bg-slate-900 p-6 rounded-xl border border-white/10 mb-12 max-w-xl">
+                <h2 className="text-xl font-bold mb-4">Yeni Teklif Oluştur</h2>
+                <form action={createOffer} className="space-y-4">
+                    <div>
+                        <label className="block text-sm text-slate-400 mb-1">Otel Adı</label>
+                        <input
+                            name="hotelName"
+                            type="text"
+                            placeholder="Örn: Regnum Carya"
+                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-gold-500 outline-none"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm text-slate-400 mb-1">Fiyat (TL)</label>
+                        <input
+                            name="price"
+                            type="text"
+                            placeholder="Örn: 50.000 TL"
+                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-gold-500 outline-none"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-gold-500 text-black font-bold py-3 rounded-lg hover:bg-gold-400 transition-colors"
+                    >
+                        Teklif Oluştur
+                    </button>
+                </form>
+            </div>
+
+            {/* List */}
+            <div className="max-w-4xl">
+                <h2 className="text-xl font-bold mb-6">Mevcut Teklifler ({offers.length})</h2>
+                <div className="space-y-4">
+                    {offers.map((offer: { id: string; hotelName: string; price: string; slug: string }) => (
+                        <div key={offer.id} className="flex flex-col md:flex-row items-center justify-between bg-slate-900 border border-slate-800 p-4 rounded-xl gap-4">
+                            <div>
+                                <h3 className="font-bold text-lg">{offer.hotelName}</h3>
+                                <div className="flex gap-4 text-sm text-slate-400 mt-1">
+                                    <span>{offer.price}</span>
+                                    <span className="text-slate-600">|</span>
+                                    <a href={`/${offer.slug}`} target="_blank" className="text-blue-400 hover:underline">
+                                        /{offer.slug}
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <form action={deleteOffer.bind(null, offer.id)}>
+                                    <button className="text-red-400 hover:text-red-300 text-sm px-3 py-1 bg-red-500/10 rounded-lg transition-colors">
+                                        Sil
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    ))}
+                    {offers.length === 0 && (
+                        <p className="text-slate-600 italic">Henüz teklif oluşturulmadı.</p>
+                    )}
+                </div>
+            </div>
+        </main>
+    );
+}
