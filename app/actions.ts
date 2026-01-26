@@ -24,13 +24,21 @@ export async function createOffer(formData: FormData) {
         .replace(/-+/g, "-") // Collapse dashes
         .replace(/^-|-$/g, ""); // Trim dashes
 
-    const slug = `${slugBase}-teklif`;
+    let slug = `${slugBase}-teklif`;
+    let uniqueSlug = slug;
+    let counter = 1;
+
+    // Ensure uniqueness
+    while (await prisma.offer.findUnique({ where: { slug: uniqueSlug } })) {
+        uniqueSlug = `${slug}-${counter}`;
+        counter++;
+    }
 
     await prisma.offer.create({
         data: {
             hotelName,
             price, // e.g. "50.000 TL"
-            slug
+            slug: uniqueSlug
         }
     });
 
