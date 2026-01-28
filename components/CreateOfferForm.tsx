@@ -35,8 +35,9 @@ export function CreateOfferForm() {
 
         while (attempts < maxRetries) {
             try {
-                // Fetch with cache-busting to force server to respond
-                const res = await fetch(url, { method: "HEAD", cache: "no-store" });
+                // Fetch with cache-busting logic to force check
+                // We use GET to ensure the server actually generates the full HTML
+                const res = await fetch(`${url}?t=${Date.now()}`, { method: "GET" });
                 if (res.ok) {
                     setStatus("done");
                     return;

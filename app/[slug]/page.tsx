@@ -31,6 +31,8 @@ const getOffer = unstable_cache(
 );
 
 export const dynamicParams = true; // Allow new pages to be generated on demand
+export const revalidate = 3600; // Revalidate every hour
+export const fetchCache = 'force-cache'; // Cache all fetches by default
 
 export default async function OfferPage({ params }: PageProps) {
     const { slug } = await params;

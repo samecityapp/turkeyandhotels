@@ -48,8 +48,8 @@ export async function createOffer(formData: FormData) {
     console.log(`🔥 Warming up: ${url}`);
 
     try {
-        // Trigger ISR/SSG generation
-        await fetch(url, { method: 'HEAD', cache: 'no-store' });
+        // Trigger ISR/SSG generation with a real visitor simulation (GET)
+        await fetch(url, { method: 'GET' }); // Default cache behavior
         console.log(`✅ Warmup signal sent: ${url}`);
     } catch (e) {
         console.error(`❌ Warmup failed for ${url}:`, e);
