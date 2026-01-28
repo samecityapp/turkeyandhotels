@@ -50,12 +50,9 @@ export const Hero = () => {
     return (
         <section className="relative pt-20 pb-12 px-4 overflow-hidden">
             {/* Background Glow */}
-            {/* Background Glow - Optimized for Mobile */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-gold-500/10 to-transparent rounded-full opacity-50 pointer-events-none" />
-
             <div className="max-w-4xl mx-auto text-center relative z-10">
                 <h1
-                    className="animate-fade-in-up text-4xl md:text-6xl font-bold tracking-tight mb-12 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 leading-tight"
+                    className="text-4xl md:text-6xl font-bold tracking-tight mb-12 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 leading-tight"
                 >
                     Türkiye’nin En Prestijli
                     <br />
@@ -63,7 +60,7 @@ export const Hero = () => {
                 </h1>
 
                 <div
-                    className="grid gap-4 md:grid-cols-3 animate-fade-in-up-delay"
+                    className="grid gap-4 md:grid-cols-3"
                 >
                     {socialLinks.map((social, index) => (
                         <a
