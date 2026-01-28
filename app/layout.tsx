@@ -5,6 +5,7 @@ import "./globals.css";
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -18,9 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className="dark">
+    <html lang="tr" className="dark" style={{ backgroundColor: '#020617' }}>
       <body
         className={`${outfit.variable} antialiased bg-[#020617] text-white`}
+        style={{ backgroundColor: '#020617' }}
       >
         {children}
       </body>

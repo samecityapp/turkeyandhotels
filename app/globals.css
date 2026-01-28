@@ -43,7 +43,7 @@
 
   .animate-fade-in-up-delay {
     animation: fadeInUp 0.8s ease-out 0.3s forwards;
-    opacity: 0;
+    /* opacity: 0; Removed to prevent Safari FOIT */
   }
 }
 
