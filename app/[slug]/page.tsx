@@ -4,16 +4,38 @@ import { Pricing } from "@/components/Pricing";
 import { Hero } from "@/components/Hero";
 import { ValueProps } from "@/components/ValueProps";
 
+import { unstable_cache } from 'next/cache';
+
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
 
+// 1. Define Static Params to pre-build pages
+export async function generateStaticParams() {
+    const offers = await prisma.offer.findMany({
+        select: { slug: true },
+    });
+
+    return offers.map((offer) => ({
+        slug: offer.slug,
+    }));
+}
+
+// 2. Cache DB results for Incremental Static Regeneration (ISR)
+const getOffer = unstable_cache(
+    async (slug: string) => prisma.offer.findUnique({
+        where: { slug }
+    }),
+    ['offer-by-slug'],
+    { revalidate: 3600 } // Cache for 1 hour
+);
+
+export const dynamicParams = true; // Allow new pages to be generated on demand
+
 export default async function OfferPage({ params }: PageProps) {
     const { slug } = await params;
 
-    const offer = await prisma.offer.findUnique({
-        where: { slug },
-    });
+    const offer = await getOffer(slug);
 
     if (!offer) {
         notFound();
