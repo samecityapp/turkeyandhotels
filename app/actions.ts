@@ -42,6 +42,19 @@ export async function createOffer(formData: FormData) {
         }
     });
 
+    // Warm up the cache immediately
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const url = `${baseUrl}/${uniqueSlug}`;
+    console.log(`🔥 Warming up: ${url}`);
+
+    try {
+        // Trigger ISR/SSG generation
+        await fetch(url, { method: 'HEAD', cache: 'no-store' });
+        console.log(`✅ Warmup signal sent: ${url}`);
+    } catch (e) {
+        console.error(`❌ Warmup failed for ${url}:`, e);
+    }
+
     revalidatePath("/admin");
     // return { success: true }; // Return void to satisfy form action type
 }
