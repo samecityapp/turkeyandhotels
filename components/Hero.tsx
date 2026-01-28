@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { Instagram } from "lucide-react";
 
 // Custom TikTok Icon
@@ -53,22 +53,16 @@ export const Hero = () => {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-500/10 blur-[120px] rounded-full pointer-events-none" />
 
             <div className="max-w-4xl mx-auto text-center relative z-10">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-4xl md:text-6xl font-bold tracking-tight mb-12 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 leading-tight"
+                <h1
+                    className="animate-fade-in-up text-4xl md:text-6xl font-bold tracking-tight mb-12 bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 leading-tight"
                 >
                     Türkiye’nin En Prestijli
                     <br />
                     <span className="text-gold-500">Otel Tanıtım Sayfaları</span>
-                </motion.h1>
+                </h1>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3, duration: 0.8 }}
-                    className="grid gap-4 md:grid-cols-3"
+                <div
+                    className="grid gap-4 md:grid-cols-3 animate-fade-in-up-delay"
                 >
                     {socialLinks.map((social, index) => (
                         <a
@@ -90,7 +84,7 @@ export const Hero = () => {
                             </div>
                         </a>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );
