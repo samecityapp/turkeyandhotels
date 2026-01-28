@@ -55,8 +55,11 @@ export async function createOffer(formData: FormData) {
         console.error(`❌ Warmup failed for ${url}:`, e);
     }
 
+    // We still try server-side warmup as a "bonus", but client side is the guarantee.
+    // ... (existing warmup code is fine to keep as double-check)
+
     revalidatePath("/admin");
-    // return { success: true }; // Return void to satisfy form action type
+    return { success: true, slug: uniqueSlug };
 }
 
 export async function deleteOffer(id: string) {

@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
-import { createOffer, deleteOffer } from "../actions";
+import { deleteOffer } from "../actions";
+import { CreateOfferForm } from "@/components/CreateOfferForm";
 
 export default async function AdminPage() {
     const offers = await prisma.offer.findMany({
@@ -11,37 +12,7 @@ export default async function AdminPage() {
             <h1 className="text-3xl font-bold mb-8 text-gold-500">Admin Paneli - Teklif Yönetimi</h1>
 
             {/* Create Form */}
-            <div className="bg-slate-900 p-6 rounded-xl border border-white/10 mb-12 max-w-xl">
-                <h2 className="text-xl font-bold mb-4">Yeni Teklif Oluştur</h2>
-                <form action={createOffer} className="space-y-4">
-                    <div>
-                        <label className="block text-sm text-slate-400 mb-1">Otel Adı</label>
-                        <input
-                            name="hotelName"
-                            type="text"
-                            placeholder="Örn: Regnum Carya"
-                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-gold-500 outline-none"
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm text-slate-400 mb-1">Fiyat (TL)</label>
-                        <input
-                            name="price"
-                            type="text"
-                            placeholder="Örn: 50.000 TL"
-                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:border-gold-500 outline-none"
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-gold-500 text-black font-bold py-3 rounded-lg hover:bg-gold-400 transition-colors"
-                    >
-                        Teklif Oluştur
-                    </button>
-                </form>
-            </div>
+            <CreateOfferForm />
 
             {/* List */}
             <div className="max-w-4xl">
