@@ -33,7 +33,7 @@ export const ValueProps = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.2, duration: 0.6 }}
-                            className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300 backdrop-blur-sm"
+                            className="p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300"
                         >
                             <div className="w-14 h-14 rounded-xl bg-gold-500/20 flex items-center justify-center mb-6 text-gold-500">
                                 <feature.icon className="w-7 h-7" />
