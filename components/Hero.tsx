@@ -50,7 +50,8 @@ export const Hero = () => {
     return (
         <section className="relative pt-20 pb-12 px-4 overflow-hidden">
             {/* Background Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-500/10 blur-[120px] rounded-full pointer-events-none" />
+            {/* Background Glow - Optimized for Mobile */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-gold-500/10 to-transparent rounded-full opacity-50 pointer-events-none" />
 
             <div className="max-w-4xl mx-auto text-center relative z-10">
                 <h1
