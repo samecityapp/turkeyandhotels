@@ -57,6 +57,9 @@ export default async function OfferPage({ params }: PageProps) {
 
             <footer className="py-8 text-center text-white/40 text-sm border-t border-white/5">
                 <p>&copy; {new Date().getFullYear()} Türkiye’nin En Prestijli Otel Tanıtım Sayfaları. Tüm hakları saklıdır.</p>
+                <p className="text-[10px] mt-2 opacity-50">
+                    Oluşturulma: {new Date().toLocaleTimeString("tr-TR")} (Cache Debug)
+                </p>
             </footer>
         </main>
     );
