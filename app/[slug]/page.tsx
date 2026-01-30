@@ -37,14 +37,27 @@ export const fetchCache = 'force-cache'; // Cache all fetches by default
 export default async function OfferPage({ params }: PageProps) {
     const { slug } = await params;
 
-    const offer = await getOffer(slug);
+    let offer = await getOffer(slug);
 
+    // Fallback: If offer not found in DB, generate from slug (since user might not use DB yet)
     if (!offer) {
-        notFound();
-    }
+        // Parse slug like "posedion-kirke-teklif" -> "Posedion Kirke"
+        // Remove "teklif" suffix if present
+        const titleSlug = slug.replace(/-teklif$/i, '');
+        const hotelName = titleSlug.split('-').map(word =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
 
-    // Optional: Pass hotelName to Hero if we decide to customize it too.
-    // For now, only Pricing is required custom.
+        offer = {
+            id: "temp",
+            slug: slug,
+            hotelName: hotelName,
+            price: "30.000 TL", // Default price since we don't have DB
+            currency: "TL",
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
+    }
 
     return (
         <main className="min-h-screen bg-[#020617] text-white selection:bg-gold-500 selection:text-black">
@@ -53,13 +66,11 @@ export default async function OfferPage({ params }: PageProps) {
             <Pricing
                 hotelName={offer.hotelName}
                 customPrice={offer.price}
+                showPrice={true}
             />
 
             <footer className="py-8 text-center text-white/40 text-sm border-t border-white/5">
                 <p>&copy; {new Date().getFullYear()} Türkiye’nin En Prestijli Otel Tanıtım Sayfaları. Tüm hakları saklıdır.</p>
-                <p className="text-[10px] mt-2 opacity-50">
-                    Oluşturulma: {new Date().toLocaleTimeString("tr-TR")} (Cache Debug)
-                </p>
             </footer>
         </main>
     );
