@@ -38,9 +38,10 @@ const offers = [
 interface PricingProps {
     hotelName?: string;
     customPrice?: string;
+    showPrice?: boolean;
 }
 
-export const Pricing = ({ hotelName, customPrice }: PricingProps) => {
+export const Pricing = ({ hotelName, customPrice, showPrice = false }: PricingProps) => {
     // Clone offers to avoid mutating the original array reference if reused
     const currentOffers = offers.map(offer => ({ ...offer }));
 
@@ -78,7 +79,7 @@ export const Pricing = ({ hotelName, customPrice }: PricingProps) => {
                                 }`}
                         >
                             {offer.highlight && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-500 text-black px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1 shadow-lg">
+                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold-500 text-black px-4 py-1 rounded-full text-sm font-bold flex items-center gap-1 shadow-lg z-10">
                                     <Star className="w-3 h-3 fill-current" />
                                     EN POPÜLER
                                 </div>
@@ -87,19 +88,27 @@ export const Pricing = ({ hotelName, customPrice }: PricingProps) => {
                             <h3 className={`text-2xl font-bold mb-2 ${offer.highlight ? "text-gold-500" : "text-white"}`}>
                                 {offer.title}
                             </h3>
-                            <div className="text-4xl md:text-5xl font-bold mb-8">{offer.price}</div>
 
-                            <ul className="space-y-4 mb-8">
-                                {offer.features.map((feature, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <div className={`mt-1 p-0.5 rounded-full ${offer.highlight ? "bg-gold-500 text-black" : "bg-white/20"}`}>
-                                            <Check className="w-3 h-3" />
-                                        </div>
-                                        <span className="text-white/80 text-sm md:text-base">{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            <div className={`transition-all duration-500 ${!showPrice ? "blur-md select-none opacity-50 grayscale" : ""}`}>
+                                <div className="text-4xl md:text-5xl font-bold mb-8">{offer.price}</div>
 
+                                <ul className="space-y-4 mb-8">
+                                    {offer.features.map((feature, i) => (
+                                        <li key={i} className="flex items-start gap-3">
+                                            <div className={`mt-1 p-0.5 rounded-full ${offer.highlight ? "bg-gold-500 text-black" : "bg-white/20"}`}>
+                                                <Check className="w-3 h-3" />
+                                            </div>
+                                            <span className="text-white/80 text-sm md:text-base">{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {!showPrice && (
+                                <div className="absolute inset-0 flex items-center justify-center z-20">
+
+                                </div>
+                            )}
 
                         </motion.div>
                     ))}
