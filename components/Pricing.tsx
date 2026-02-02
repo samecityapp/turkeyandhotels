@@ -90,7 +90,7 @@ export const Pricing = ({ hotelName, customPrice, showPrice = false }: PricingPr
                             </h3>
 
                             <div className={`transition-all duration-500 ${!showPrice ? "blur-md select-none opacity-50 grayscale" : ""}`}>
-                                <div className="text-4xl md:text-5xl font-bold mb-8">{offer.price}</div>
+                                <div className={`text-4xl md:text-5xl font-bold mb-8 ${offer.title === "Premium Paket" ? "blur-md select-none opacity-70" : ""}`}>{offer.price}</div>
 
                                 <ul className="space-y-4 mb-8">
                                     {offer.features.map((feature, i) => (
