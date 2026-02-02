@@ -8,7 +8,7 @@ const offers = [
         title: "Standart Paket",
         price: "30.000 TL",
         features: [
-            "Geceliği Ne Kadar Instagram: 1 Reel + 1 Hikaye",
+            "Geceliği Ne Kadar Instagram: 1 Reel + 3 Hikaye",
             "Geceliği Ne Kadar Tiktok: 1 Reel + 1 Hikaye",
             "Turkeyandhotels Instagram: 1 Hikaye",
             "Youtube Kanalı: Short Video",
