@@ -24,7 +24,7 @@ const socialLinks = [
         icon: Instagram,
         color: "group-hover:text-pink-500",
         gradient: "from-purple-500 to-pink-500",
-        followers: "323.000+ Takipçi"
+        followers: "321.000+ Takipçi"
     },
     {
         name: "@Geceligi.ne.kadar",
@@ -33,7 +33,7 @@ const socialLinks = [
         icon: Instagram,
         color: "group-hover:text-orange-500",
         gradient: "from-yellow-500 to-orange-500",
-        followers: "303.000+ Takipçi"
+        followers: "307.000+ Takipçi"
     },
     {
         name: "@Geceligi.nekadar",
